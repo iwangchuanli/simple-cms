@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cms.template.mapper.SiteMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cms.template.entity.Site">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="nick_name" property="nickName" />
+        <result column="address" property="address" />
+        <result column="lat" property="lat" />
+        <result column="lng" property="lng" />
+        <result column="logo" property="logo" />
+        <result column="phone" property="phone" />
+        <result column="email" property="email" />
+        <result column="beian" property="beian" />
+        <result column="description" property="description" />
+        <result column="detail" property="detail" />
+        <result column="domain" property="domain" />
+        <result column="status" property="status" />
+        <result column="recommend_article" property="recommendArticle" />
+        <result column="banner" property="banner" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, nick_name, address, lat, lng, logo, phone, email, beian, description, detail, domain, status, recommend_article, banner
+    </sql>
+
+</mapper>

@@ -1,0 +1,102 @@
+server:
+  ip: 127.0.0.1
+  port: 9080
+  servlet:
+    context-path: /
+spring:
+  application:
+    name: cms
+  ssdb:
+    host: ip
+    port: 6379
+    max-active: 5
+    timeout: 10000
+    password: password
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  datasource:
+    druid:
+      url: jdbc:mysql://127.0.0.1:3306/cms?useUnicode=true&characterEncoding=UTF-8
+      username: root
+      password: password
+      # 使用druid数据源
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      # 连接池配置
+      # 初始化大小，最小，最大
+      initial-size: 1
+      max-active: 20
+      min-idle: 3
+      # 配置获取连接等待超时的时间
+      max-wait: 60000
+      max-open-prepared-statements: 20
+      validation-query: SELECT 1
+      validation-query-timeout: 5000
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 30000
+      #      max-evictable-idle-time-millis: 60000
+      removeAbandoned: true
+      removeAbandonedTimeout: 1800
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      poolPreparedStatements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat,wall #filters: #配置多个英文逗号分隔(统计，sql注入，log4j过滤)
+      web-stat-filter:
+        enabled: true
+        #添加过滤规则
+        url-pattern: /*
+        #排除一些不必要的url
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+        #开启session统计功能
+        session-stat-enable: true
+        #缺省sessionStatMaxCount是1000个
+        session-stat-max-count: 1000
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: false
+        login-username: druid
+        login-password: 123456789
+        allow: 127.0.0.1
+        deny:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+jwt:
+  secret: secret
+  expiration: 604800
+
+mybatis-plus:
+  global-config:
+    db-config:
+      #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+      update-strategy: not_null
+
+logging:
+  level:
+    root: info
+  config: classpath:logback-spring.xml
+  file:
+    path: ./logs
+
+#阿里云短信
+ali:
+  sms:
+    accessKeyId:  key
+    accessSecret: secret
+    signName: name
+    templateCode: code
+  oss:
+    accessKeyId:  key
+    accessKeySecret: secret
+    endpoint: endpoint
+    bucketName: name
+    bucketUrl: url
